@@ -15,7 +15,7 @@ public class SampleMojoIntegrationTest extends AbstractMojoIntegrationTest {
 
   @Test
   public void testBasic() throws Exception {
-    File basedir = resources.getBasedir("basic");
+    File basedir = resources.getBasedir("basic-it");
 
     VerifierResult result = verifier.forProject(basedir).execute("compile");
 

@@ -18,7 +18,7 @@ public abstract class AbstractMojoIntegrationTest {
   public final VerifierRuntime verifier;
 
   protected AbstractMojoIntegrationTest(String mavenVersion) throws Exception {
-    this.resources = new TestResources("src/test/its", "target/it/" + mavenVersion + "/");
+    this.resources = new TestResources("src/test/projects", "target/it/" + mavenVersion + "/");
     this.verifier = VerifierRuntime.builder(mavenVersion).withCliOptions("-X").build();
   }
 

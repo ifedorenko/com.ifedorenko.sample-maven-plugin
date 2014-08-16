@@ -11,6 +11,16 @@
     <mavenPluginPluginVersion>3.3</mavenPluginPluginVersion>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>takari.snapshots</id>
+      <url>http://repository.takari.io:8081/nexus/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>

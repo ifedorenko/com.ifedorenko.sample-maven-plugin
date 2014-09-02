@@ -5,7 +5,7 @@ import io.takari.maven.testing.executor.MavenExecutionResult;
 import io.takari.maven.testing.executor.MavenInstallations;
 import io.takari.maven.testing.executor.MavenRuntime;
 import io.takari.maven.testing.executor.MavenVersions;
-import io.takari.maven.testing.executor.MavenRuntime.VerifierRuntimeBuilder;
+import io.takari.maven.testing.executor.MavenRuntime.MavenRuntimeBuilder;
 import io.takari.maven.testing.executor.junit.MavenJUnitTestRunner;
 
 import java.io.File;
@@ -24,7 +24,7 @@ public class SampleMojoIntegrationTest {
 
   public final MavenRuntime verifier;
 
-  public SampleMojoIntegrationTest(VerifierRuntimeBuilder builder) throws Exception {
+  public SampleMojoIntegrationTest(MavenRuntimeBuilder builder) throws Exception {
     this.verifier = builder.withCliOptions("-X").build();
   }
 

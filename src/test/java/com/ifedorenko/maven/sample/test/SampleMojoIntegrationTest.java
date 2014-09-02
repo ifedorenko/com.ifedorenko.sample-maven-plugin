@@ -2,15 +2,30 @@ package com.ifedorenko.maven.sample.test;
 
 import io.takari.maven.testing.TestResources;
 import io.takari.maven.testing.it.VerifierResult;
+import io.takari.maven.testing.it.VerifierRuntime;
+import io.takari.maven.testing.it.VerifierRuntime.VerifierRuntimeBuilder;
+import io.takari.maven.testing.it.junit.MavenInstallations;
+import io.takari.maven.testing.it.junit.MavenTestRunner;
+import io.takari.maven.testing.it.junit.MavenVersions;
 
 import java.io.File;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class SampleMojoIntegrationTest extends AbstractMojoIntegrationTest {
+@RunWith(MavenTestRunner.class)
+@MavenInstallations({"target/maven-installation/apache-maven-3.2.2"})
+@MavenVersions({"3.0.5", "3.2.3"})
+public class SampleMojoIntegrationTest {
 
-  public SampleMojoIntegrationTest(String version) throws Exception {
-    super(version);
+  @Rule
+  public final TestResources resources = new TestResources();
+
+  public final VerifierRuntime verifier;
+
+  public SampleMojoIntegrationTest(VerifierRuntimeBuilder builder) throws Exception {
+    this.verifier = builder.withCliOptions("-X").build();
   }
 
   @Test

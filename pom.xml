@@ -4,22 +4,13 @@
   <groupId>com.ifedorenko.maven</groupId>
   <artifactId>sample-maven-plugin</artifactId>
   <version>0.1.0-SNAPSHOT</version>
-  <packaging>maven-plugin</packaging>
+  <packaging>takari-maven-plugin</packaging>
 
   <properties>
     <mavenVersion>3.2.1</mavenVersion>
     <mavenPluginPluginVersion>3.3</mavenPluginPluginVersion>
+    <pluginTestingVersion>2.1.0</pluginTestingVersion>
   </properties>
-
-  <repositories>
-    <repository>
-      <id>takari.snapshots</id>
-      <url>http://repository.takari.io:8081/nexus/content/repositories/snapshots/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 
   <dependencies>
     <dependency>
@@ -62,15 +53,16 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.maven.plugin-testing</groupId>
-      <artifactId>maven-plugin-testing-harness</artifactId>
-      <version>3.2.0</version>
+      <groupId>io.takari.maven.plugins</groupId>
+      <artifactId>takari-plugin-testing</artifactId>
+      <version>${pluginTestingVersion}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.takari.maven.plugins</groupId>
-      <artifactId>takari-plugin-testing</artifactId>
-      <version>1.8.1</version>
+      <artifactId>takari-plugin-integration-testing</artifactId>
+      <version>${pluginTestingVersion}</version>
+      <type>pom</type>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -78,91 +70,21 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>sisu-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
+        <groupId>io.takari.maven.plugins</groupId>
+        <artifactId>takari-lifecycle-plugin</artifactId>
+        <version>1.10.2</version>
+        <extensions>true</extensions>
+        <configuration>
+          <proc>none</proc>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>io.takari.maven.plugins</groupId>
-        <artifactId>takari-plugin-testing-plugin</artifactId>
-        <version>1.8.0-SNAPSHOT</version>
-        <executions>
-          <execution>
-            <id>testProperties</id>
-            <goals>
-              <goal>testProperties</goal>
-            </goals>
-            <phase>process-test-resources</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.8</version>
-        <executions>
-          <execution>
-            <id>unpack</id>
-            <phase>generate-test-resources</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/maven-installation</outputDirectory>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.apache.maven</groupId>
-                  <artifactId>apache-maven</artifactId>
-                  <version>3.0.5</version>
-                  <classifier>bin</classifier>
-                  <type>tar.gz</type>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>org.apache.maven</groupId>
-                  <artifactId>apache-maven</artifactId>
-                  <version>3.2.2</version>
-                  <classifier>bin</classifier>
-                  <type>tar.gz</type>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>org.apache.maven</groupId>
-                  <artifactId>apache-maven</artifactId>
-                  <version>3.2.3</version>
-                  <classifier>bin</classifier>
-                  <type>tar.gz</type>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
-          </configuration>
-        </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>animal-sniffer-maven-plugin</artifactId>
@@ -193,39 +115,14 @@
           </configuration>
         </plugin>
         <plugin>
-          <groupId>org.sonatype.plugins</groupId>
-          <artifactId>sisu-maven-plugin</artifactId>
-          <version>1.1</version>
-          <executions>
-            <execution>
-              <id>generate-index</id>
-              <goals>
-                <goal>main-index</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
           <version>${mavenPluginPluginVersion}</version>
           <configuration>
-            <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+            <packagingTypes>
+              <packaging>takari-maven-plugin</packaging>
+            </packagingTypes>
           </configuration>
-          <executions>
-            <execution>
-              <id>default-descriptor</id>
-              <phase>process-classes</phase>
-              <goals>
-                <goal>descriptor</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.17</version>
         </plugin>
       </plugins>
     </pluginManagement>

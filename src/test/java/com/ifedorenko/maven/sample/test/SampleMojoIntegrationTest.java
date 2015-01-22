@@ -2,10 +2,9 @@ package com.ifedorenko.maven.sample.test;
 
 import io.takari.maven.testing.TestResources;
 import io.takari.maven.testing.executor.MavenExecutionResult;
-import io.takari.maven.testing.executor.MavenInstallations;
 import io.takari.maven.testing.executor.MavenRuntime;
-import io.takari.maven.testing.executor.MavenVersions;
 import io.takari.maven.testing.executor.MavenRuntime.MavenRuntimeBuilder;
+import io.takari.maven.testing.executor.MavenVersions;
 import io.takari.maven.testing.executor.junit.MavenJUnitTestRunner;
 
 import java.io.File;
@@ -15,8 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(MavenJUnitTestRunner.class)
-@MavenInstallations({"target/maven-installation/apache-maven-3.2.2"})
-@MavenVersions({"3.0.5", "3.2.3"})
+@MavenVersions({"3.0.5", "3.2.5"})
 public class SampleMojoIntegrationTest {
 
   @Rule

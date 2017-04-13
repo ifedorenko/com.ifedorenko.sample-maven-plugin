@@ -2,7 +2,9 @@ package com.ifedorenko.maven.sample;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -14,6 +16,9 @@ public class SampleMojo extends AbstractMojo {
 
   @Parameter(defaultValue = "${project.build.directory}/sample")
   private File outputDirectory;
+  
+  @Parameter(defaultValue="${project.artifacts}")
+  private Set<Artifact> dependencies;
 
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {

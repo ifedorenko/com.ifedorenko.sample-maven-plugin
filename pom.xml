@@ -9,7 +9,7 @@
   <properties>
     <mavenVersion>3.2.1</mavenVersion>
     <mavenPluginPluginVersion>3.3</mavenPluginPluginVersion>
-    <pluginTestingVersion>2.9.0</pluginTestingVersion>
+    <pluginTestingVersion>2.9.2</pluginTestingVersion>
   </properties>
 
   <dependencies>
@@ -72,7 +72,7 @@
       <plugin>
         <groupId>io.takari.maven.plugins</groupId>
         <artifactId>takari-lifecycle-plugin</artifactId>
-        <version>1.12.2</version>
+        <version>1.13.4</version>
         <extensions>true</extensions>
         <configuration>
           <proc>none</proc>

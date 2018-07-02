@@ -18,7 +18,7 @@ public class SampleMojoTest {
 
   @Test
   public void testBasic() throws Exception {
-    File basedir = resources.getBasedir("basic");
+    File basedir = resources.getBasedir();
     mojos.executeMojo(basedir, "sample");
     TestResources.assertDirectoryContents(new File(basedir, "target/sample"), "sample.txt");
   }
